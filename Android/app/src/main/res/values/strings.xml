@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BlackBox</string>
+    <string name="connection_ping_string">http://192.232.204.128:3000/ping</string>
+    <string name="connection_create_string">http://192.232.204.128:3000/new</string>
+    <string name="connection_delete_string">http://192.232.204.128:3000/stop</string>
+    <string name="nyi">Not Yet Initialized </string>
+    <string name="start">Start</string>
+    <string name="contacts">Contacts</string>
+    <string name="ping">Ping</string>
+</resources>

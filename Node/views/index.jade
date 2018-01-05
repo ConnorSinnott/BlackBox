@@ -1,0 +1,117 @@
+extends layout
+
+block content
+
+    script(src="/javascripts/main.js")
+
+    //HEADER
+    div.jumbotron#header
+        div.logoHeader
+            h1 BlackBox
+            img(src="./images/BB.jpg")
+        p.text-center.surround Be found.
+
+    //CONTAINER
+    div.container-fluid
+
+        //JUMBOTRON
+        div.row
+            div.col-md-8.col-md-offset-2
+                //LEAD PARAGRAPH
+                div.jumbotron.bg-success.text-center
+                    p BlackBox is an emergency app for your loved ones. Receive alerts to your phone if your loved one is in trouble.
+                    hr
+                    p Winner of "Best Application" from CodeDay 2017 Seattle-Eastside
+                    img(src="/images/codeday.jpg")
+                    hr
+                    p BlackBox was built on February 18, 2017 as a submission to CodeDay's Eastside 24-hour hackathon.
+                    p Users can create an object consisting of a user id, message, duration, and contact list, and post it to the server.
+                    p The object is then added to a Mongo database where it is checked every second against its expiration time.
+                    p If the expiration time is reached, the object is removed from the database and a text message will be sent to the included contacts using Twilio.
+                    p While an object is in the database, users can ping the server with their id, allowing them to extend the expiration time by the duration time initially specified.
+                    p With the exception of some minor changes (such as disabling twilio) this application has been left mostly unaltered.
+                    p Developed By:
+                    p Connor Sinnott, Taylor Yee, Elizabeth Fuenzalida, Angela Vu
+                    p Concept and Hosting By:
+                    p Adam Brehm
+                    br
+                    hr
+                    p.text-muted - See the code -
+                    p
+                        a(href="https://bitbucket.org/ConnorSinnott/blackbox/src") Node.js
+                    p
+                        a(href="https://bitbucket.org/ConnorSinnott/blackbox_android/src") Android
+
+        div.page-header
+            h1 Getting Started
+
+        //FORMS ROW
+        div.row
+
+            div.col-md-8
+
+                //SIGN UP FORM [NEW]
+                div.col-md-4
+                    form(class="form-horizontal", method="POST", action="/new")
+                        h2 Sign Up
+
+                        div.form-group.text-center
+                            div.col-md-3.control-label
+                                label User ID
+                            div.col-md-9
+                                input(type="number", name="userID", class="form-control" autocomplete="on" placeholder="New User ID" required)#newUserId
+
+                        div.form-group
+                            div.col-md-3.control-label
+                                label Message
+                            div.col-md-9
+                                textarea(rows="5", columns="50", name="message", class="form-control" placeholder="Message to be sent upon expiration" required)#newMessage
+
+                        //duration in seconds
+                        div.form-group
+                            div.col-md-3.control-label
+                                label Duration
+                            div.col-md-9
+                                input(type="number", name="duration", class="form-control" placeholder="Seconds until the message expires" required)#newDuration
+
+                        div.text-center
+                            button(type="submit", class="btn btn-success btn-lg")#newSubmit Sign Up
+
+                //ADD ID FORM [PING]
+                div.col-md-4
+
+                    form(class="form-horizontal", method="POST", action="/ping")
+                        h2 Ping
+
+                        div.form-group.text-center
+                            div.col-md-3.control-label
+                                label User ID
+                            div.col-md-9
+                                input(type="number", name="userID", class="form-control" placeholder="Existing User ID" autocomplete="on" required)#pingUserId
+
+                        div.text-center
+                            button(type="submit", class="btn btn-info btn-lg", )#pingSubmit Ping
+
+
+                //STOP FORM [STOP]
+                div.col-md-4
+
+                    form(class="form-horizontal", method="POST", action="/stop")
+                        h2 Stop Service
+
+                        div.form-group.text-center
+                            div.col-md-3.control-label
+                                label User ID
+                            div.col-md-9
+                                input(type="number", name="userID", class="form-control" placeholder="Existing User ID" autocomplete="on" required)#stopUserId
+
+                        div.text-center
+                            button(type="submit", class="btn btn-danger btn-lg")#stopSubmit Stop
+
+            div.col-md-4
+
+                div.panel.panel-default
+                    div.panel-heading
+                        h3.text-center.panel-title Data
+                    div.panel-body
+                        pre#data
